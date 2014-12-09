@@ -1,4 +1,4 @@
-execute pathogen#runtime_append_all_bundles()
+execute pathogen#infect()
 execute pathogen#helptags()
 
 filetype indent on
@@ -16,4 +16,7 @@ syntax on
 " Highlight search
 set hls
 
+set background=dark
 colorscheme solarized
+
+" colorscheme railscasts
