@@ -19,4 +19,6 @@ set hls
 set background=dark
 colorscheme solarized
 
-" colorscheme railscasts
+if has('mac')
+        set guifont=PT\ Mono:h18
+endif
