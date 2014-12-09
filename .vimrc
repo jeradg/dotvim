@@ -1,4 +1,5 @@
-execute pathogen#infect()
+execute pathogen#runtime_append_all_bundles()
+execute pathogen#helptags()
 
 filetype indent on
 
