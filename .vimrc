@@ -3,7 +3,12 @@ execute pathogen#helptags()
 
 filetype indent on
 
-set autoindent
+autocmd FileType scss setlocal shiftwidth=2 tabstop=2
+autocmd FileType css setlocal shiftwidth=2 tabstop=2
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType js setlocal shiftwidth=2 tabstop=2
+autocmd FileType rb setlocal shiftwidth=2 tabstop=2
+autocmd FileType coffee setlocal shiftwidth=2 tabstop=2
 
 set tabstop=2
 
