@@ -16,3 +16,6 @@
 [submodule "bundle/unite"]
 	path = bundle/unite
 	url = https://github.com/Shougo/unite.vim.git
+[submodule "/Users/jerad/.vim/bundle/emmet-vim"]
+	path = /Users/jerad/.vim/bundle/emmet-vim
+	url = https://github.com/mattn/emmet-vim.git
