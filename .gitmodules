@@ -19,3 +19,6 @@
 [submodule "/Users/jerad/.vim/bundle/emmet-vim"]
 	path = /Users/jerad/.vim/bundle/emmet-vim
 	url = https://github.com/mattn/emmet-vim.git
+[submodule "bundle/supertab"]
+	path = bundle/supertab
+	url = https://github.com/ervandew/supertab.git
