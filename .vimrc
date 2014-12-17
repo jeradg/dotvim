@@ -1,16 +1,8 @@
+" Load Pathogen plugins
 execute pathogen#infect()
 execute pathogen#helptags()
 
-" filetype indent on
-
-" autocmd FileType scss setlocal shiftwidth=2 tabstop=2
-" autocmd FileType css setlocal shiftwidth=2 tabstop=2
-" autocmd FileType html setlocal shiftwidth=2 tabstop=2
-" autocmd FileType js setlocal shiftwidth=2 tabstop=2
-" autocmd FileType rb setlocal shiftwidth=2 tabstop=2
-" autocmd FileType coffee setlocal shiftwidth=2 tabstop=2
-" autocmd FileType md setlocal shiftwidth=2 tabstop=2
-
+" Tab settings
 set smartindent
 set tabstop=2
 set shiftwidth=2
@@ -25,6 +17,13 @@ syntax on
 " Highlight search
 set hls
 
+""" Filetype-specific settings """
+" Haskell
+au BufEnter *.hs compiler ghc
+au BufEnter *.hs let g:haddock_browser="/usr/bin/google-chrome-stable"
+autocmd FileType hs set tabstop=8 softtabstop=4 shiftwidth=4 shiftround
+
+" Theme
 set background=dark
 colorscheme solarized
 
