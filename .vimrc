@@ -25,7 +25,10 @@ autocmd FileType hs set tabstop=8 softtabstop=4 shiftwidth=4 shiftround
 
 " Theme
 set background=dark
-colorscheme solarized
+colorscheme jellybeans
+
+" Lightline colours
+let g:lightline = {'colorscheme': 'jellybeans'}
 
 if has('mac')
         set guifont=PT\ Mono:h18
