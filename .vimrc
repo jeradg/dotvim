@@ -17,6 +17,10 @@ syntax on
 " Highlight search
 set hls
 
+" Set terminal to screen with 256 colours
+" (Fixes colours when using vim with tmux)
+set term=screen-256color
+
 """ Filetype-specific settings """
 " Haskell
 au BufEnter *.hs compiler ghc
