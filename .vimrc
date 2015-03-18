@@ -67,5 +67,8 @@ call unite#custom#source('file_mru','sorters','sorter_none')
 let g:unite_enable_start_insert=1
 let g:unite_source_history_yank_enable=1
 
+" Use Unite like ctrlp
+nnoremap <C-p> :Unite file_rec/async<cr>
+
 " Disable folding in Markdown files
 let g:vim_markdown_folding_disabled=1
