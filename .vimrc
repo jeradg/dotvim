@@ -67,3 +67,5 @@ call unite#custom#source('file_mru','sorters','sorter_none')
 let g:unite_enable_start_insert=1
 let g:unite_source_history_yank_enable=1
 
+" Disable folding in Markdown files
+let g:vim_markdown_folding_disabled=1
