@@ -58,3 +58,9 @@
 [submodule "bundle/splitjoin"]
 	path = bundle/splitjoin
 	url = git@github.com:AndrewRadev/splitjoin.vim.git
+[submodule "bundle/command-t"]
+	path = bundle/command-t
+	url = git://git.wincent.com/command-t.git
+[submodule "bundle/dbext"]
+	path = bundle/dbext
+	url = git@github.com:vim-scripts/dbext.vim.git

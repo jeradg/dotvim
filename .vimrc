@@ -39,13 +39,16 @@ endif
 if executable('ag')
 " Use ag in unite grep source.
 let g:unite_source_grep_command = 'ag'
-let g:unite_source_grep_default_opts =
-\ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
-\ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'' ' .
-\ ' --ignore ''.yardoc'' --ignore ''html'' --ignore ''doc'' ' .
-\ ' --ignore ''vendor'' --ignore ''log'' --ignore ''public/assets'' ' .
-\ ' --ignore ''tmp'' '
+" let g:unite_source_grep_default_opts =
+" \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
+" \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'' ' .
+" \ ' --ignore ''.yardoc'' --ignore ''html'' --ignore ''doc'' ' .
+" \ ' --ignore ''vendor'' --ignore ''log'' --ignore ''public/assets'' ' .
+" \ ' --ignore ''node_modules'' --ignore ''.sass-cache'' ' .
+" \ ' --ignore ''tmp'' '
 let g:unite_source_grep_recursive_opt = ''
+" let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
+let g:unite_source_rec_async_command = 'ag --follow --nocolor --nogroup --hidden -g ""'
 elseif executable('pt')
 " if executable('pt')
 " Use pt in unite grep source.
@@ -53,6 +56,7 @@ elseif executable('pt')
 let g:unite_source_grep_command = 'pt'
 let g:unite_source_grep_default_opts = '--nogroup --nocolor'
 let g:unite_source_grep_recursive_opt = ''
+" Ignore .gitignore'd files with async search
 elseif executable('ack-grep')
 " Use ack in unite grep source.
 let g:unite_source_grep_command = 'ack-grep'
@@ -66,6 +70,9 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#custom#source('file_mru','sorters','sorter_none')
 let g:unite_enable_start_insert=1
 let g:unite_source_history_yank_enable=1
+" " Ignore .gitignore files
+" call unite#custom#source('file_rec/async', 'matchers',
+"   \ 'matcher_project_ignore_files')
 
 " Use Unite like ctrlp
 nnoremap <C-p> :Unite file_rec/async<cr>
