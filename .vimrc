@@ -52,6 +52,12 @@ function! s:unite_settings()
   " Enable navigation with control-j and control-k in insert mode
   imap <buffer> <C-j>   <Plug>(unite_select_next_line)
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+  " Close Unite
+  nmap <buffer> <ESC>      <Plug>(unite_exit)
+  imap <buffer> <C-l>      <Plug>(unite_exit)
+  nmap <buffer> <C-l>      <Plug>(unite_exit)
+  imap <buffer> <C-c>      <Plug>(unite_exit)
+  nmap <buffer> <C-c>      <Plug>(unite_exit)
 endfunction
 
 " Unite grep settings (courtesy of mgraham)
