@@ -107,6 +107,7 @@ let g:unite_source_history_yank_enable=1
 
 " Use CommandT like ctrlp
 nnoremap <C-p> :CommandT<cr>
+let g:CommandTFileScanner = 'git'
 
 " Disable folding in Markdown files
 let g:vim_markdown_folding_disabled=1
