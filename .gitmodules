@@ -72,3 +72,6 @@
 [submodule "bundle/unite-outline"]
 	path = bundle/unite-outline
 	url = git@github.com:h1mesuke/unite-outline.git
+[submodule "bundle/gnupg"]
+	path = bundle/gnupg
+	url = git@github.com:jamessan/vim-gnupg.git
