@@ -62,12 +62,16 @@ function! LightLineReadonly()
 endfunction
 
 function! LightLineFilename()
-  return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \  &ft == 'unite' ? unite#get_status_string() :
-        \  &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+  let fname = expand('%:t')
+  return fname == 'ControlP' ? g:lightline.ctrlp_item :
+    \ fname == '__Tagbar__' ? g:lightline.fname :
+    \ fname =~ '__Gundo\|NERD_tree' ? '' :
+    \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+    \ &ft == 'unite' ? unite#get_status_string() :
+    \ &ft == 'vimshell' ? vimshell#get_status_string() :
+    \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+    \ ('' != fname ? fname : '[No Name]') .
+    \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
 
