@@ -177,3 +177,6 @@ let g:CommandTFileScanner = 'git'
 
 " Disable folding in Markdown files
 let g:vim_markdown_folding_disabled=1
+
+" Gundo (graphical undo tree)
+nnoremap <F5> :GundoToggle<CR>
