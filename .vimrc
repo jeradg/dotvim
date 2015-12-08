@@ -17,6 +17,9 @@ syntax on
 " Highlight search
 set hls
 
+" consider hyphens to be part of words
+set iskeyword +=-
+
 " Set terminal to screen with 256 colours
 " (Fixes colours when using vim with tmux)
 set term=screen-256color
