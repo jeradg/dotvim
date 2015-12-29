@@ -14,6 +14,11 @@ set number
 " turn on syntax highlighting
 syntax on
 
+" Store swap files in fixed location, not current directory.
+" (Mostly to help with Ember development, as broccoli can
+" get confused when .swp files are created/deleted)
+set dir=~/.vim/swap//,/var/tmp//,/tmp//,.
+
 " Expanded Todo/Debug highlighting
 " (per http://stackoverflow.com/a/6577688/2140241)
 if has("autocmd")
