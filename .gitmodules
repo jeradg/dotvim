@@ -87,3 +87,6 @@
 [submodule "bundle/javascript"]
 	path = bundle/javascript
 	url = git@github.com:pangloss/vim-javascript.git
+[submodule "bundle/clippo"]
+	path = bundle/clippo
+	url = https://github.com/gbigwood/Clippo
