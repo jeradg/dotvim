@@ -90,3 +90,6 @@
 [submodule "bundle/clippo"]
 	path = bundle/clippo
 	url = https://github.com/gbigwood/Clippo
+[submodule "bundle/easy-align"]
+	path = bundle/easy-align
+	url = https://github.com/junegunn/vim-easy-align.git
