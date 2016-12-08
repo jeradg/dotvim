@@ -148,6 +148,13 @@ function! s:unite_settings()
   nmap <buffer> <C-c>      <Plug>(unite_exit)
 endfunction
 
+" EasyAlign
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+"
+" " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)"
+
 " Unite grep settings (courtesy of mgraham)
 " Not really using Unite grep because it's so damn slow
 " in the current version of Vim. (Might change in future.)
