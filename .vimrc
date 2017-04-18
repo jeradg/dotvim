@@ -186,6 +186,8 @@ let g:unite_source_grep_default_opts = " --ignore-dir=.yardoc --ignore-dir=html 
 let g:unite_source_grep_recursive_opt = ''
 endif
 
+" netrw
+let g:netrw_banner = 0
 
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -202,6 +204,26 @@ let g:CommandTFileScanner = 'git'
 
 " Disable folding in Markdown files
 let g:vim_markdown_folding_disabled=1
+
+" Highlight words to avoid in tech writing
+" =======================================
+"
+"   obviously, basically, simply, of course, clearly,
+"   just, everyone knows, However, So, easy
+
+"   http://css-tricks.com/words-avoid-educational-writing/
+
+"   Code from https://github.com/pengwynn/dotfiles/blob/e090448a71c46fc017acdbd393a5f2f867c6f186/vim/vimrc.symlink#L202-L218
+
+highlight TechWordsToAvoid ctermbg=red ctermfg=white
+function MatchTechWordsToAvoid()
+  match TechWordsToAvoid /\c\<\(obviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however\|so,\|easy\)\>/
+endfunction
+autocmd FileType mkd call MatchTechWordsToAvoid()
+autocmd BufWinEnter *.md call MatchTechWordsToAvoid()
+autocmd InsertEnter *.md call MatchTechWordsToAvoid()
+autocmd InsertLeave *.md call MatchTechWordsToAvoid()
+autocmd BufWinLeave *.md call clearmatches()
 
 " Gundo (graphical undo tree)
 nnoremap <F5> :GundoToggle<CR>
