@@ -14,6 +14,12 @@ set number
 " turn on syntax highlighting
 syntax on
 
+" Theme
+set background=dark
+" colorscheme jellybeans
+colorscheme solarized
+" let g:jellybeans_use_term_italics = 1
+
 " Store swap files in fixed location, not current directory.
 " (Mostly to help with Ember development, as broccoli can
 " get confused when .swp files are created/deleted)
@@ -44,10 +50,6 @@ set term=screen-256color
 au BufEnter *.hs compiler ghc
 au BufEnter *.hs let g:haddock_browser="/usr/bin/google-chrome-stable"
 autocmd FileType hs set tabstop=8 softtabstop=4 shiftwidth=4 shiftround
-
-" Theme
-set background=dark
-colorscheme jellybeans
 
 " Modified lightline theme from
 " https://github.com/itchyny/lightline.vim
@@ -204,6 +206,22 @@ let g:CommandTFileScanner = 'git'
 
 " Disable folding in Markdown files
 let g:vim_markdown_folding_disabled=1
+
+" RSpec.vim mappings
+let g:rspec_command = "call Send_to_Tmux(\"RSpecConsole.run '{spec}'\n\")"
+" map <Leader>rt :call RunCurrentSpecFile()<CR>
+" map <Leader>rs :call RunNearestSpec()<CR>
+" map <Leader>rr :call RunLastSpec()<CR>
+" map <Leader>ra :call RunAllSpecs()<CR>
+
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
+" mac cmd-r -save and run last spec
+map <D-r> :w<bar>:call RunLastSpec()<CR>
+imap <D-r> <esc>:w<bar>:call RunLastSpec()<CR>
 
 " Highlight words to avoid in tech writing
 " =======================================

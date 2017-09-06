@@ -130,3 +130,12 @@
 	path = bundle/vim-gitgutter
 	url = git://github.com/airblade/vim-gitgutter.git
   ignore = dirty
+[submodule "bundle/vim-rspec"]
+	path = bundle/vim-rspec
+	url = https://github.com/thoughtbot/vim-rspec.git
+[submodule "bundle/tslime.vim"]
+	path = bundle/tslime.vim
+	url = https://github.com/jimmyharris/tslime.vim.git
+[submodule "bundle/vim-css-color"]
+	path = bundle/vim-css-color
+	url = https://github.com/ap/vim-css-color.git
