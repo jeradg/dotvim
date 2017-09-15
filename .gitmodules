@@ -78,10 +78,6 @@
 	path = bundle/splitjoin
 	url = git@github.com:AndrewRadev/splitjoin.vim.git
   ignore = dirty
-[submodule "bundle/command-t"]
-	path = bundle/command-t
-	url = git://git.wincent.com/command-t.git
-  ignore = dirty
 [submodule "bundle/dbext"]
 	path = bundle/dbext
 	url = git@github.com:vim-scripts/dbext.vim.git
@@ -139,3 +135,6 @@
 [submodule "bundle/vim-css-color"]
 	path = bundle/vim-css-color
 	url = https://github.com/ap/vim-css-color.git
+[submodule "bundle/command-t"]
+	path = bundle/command-t
+	url = https://github.com/wincent/command-t.git
