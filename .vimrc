@@ -14,11 +14,32 @@ set number
 " turn on syntax highlighting
 syntax on
 
-" Theme
+" Set terminal to screen with 256 colours
+" (Fixes colours when using vim with tmux)
+set term=screen-256color
+set t_Co=256
 set background=dark
+
+" for vim 8
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+" set Vim-specific sequences for RGB colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+colorscheme OceanicNext
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
+
+" airline
+let g:airline_powerline_fonts = 1
+let g:airline_theme='oceanicnext'
+
 " colorscheme jellybeans
-colorscheme solarized
 " let g:jellybeans_use_term_italics = 1
+" colorscheme solarized
 
 " Store swap files in fixed location, not current directory.
 " (Mostly to help with Ember development, as broccoli can
@@ -41,88 +62,11 @@ set hls
 " consider hyphens to be part of words
 set iskeyword +=-
 
-" Set terminal to screen with 256 colours
-" (Fixes colours when using vim with tmux)
-set term=screen-256color
-
 """ Filetype-specific settings """
 " Haskell
 au BufEnter *.hs compiler ghc
 au BufEnter *.hs let g:haddock_browser="/usr/bin/google-chrome-stable"
 autocmd FileType hs set tabstop=8 softtabstop=4 shiftwidth=4 shiftround
-
-" Modified lightline theme from
-" https://github.com/itchyny/lightline.vim
-
-" Lightline colours
-let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-      \ },
-      \ 'component_function': {
-      \   'modified': 'LightLineModified',
-      \   'readonly': 'LightLineReadonly',
-      \   'fugitive': 'LightLineFugitive',
-      \   'filename': 'LightLineFilename',
-      \   'fileformat': 'LightLineFileformat',
-      \   'filetype': 'LightLineFiletype',
-      \   'fileencoding': 'LightLineFileencoding',
-      \   'mode': 'LightLineMode',
-      \ }
-      \ }
-
-function! LightLineModified()
-  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-function! LightLineReadonly()
-"  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? '⭤' : ''
-  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'RO' : ''
-endfunction
-
-function! LightLineFilename()
-  let fname = expand('%:t')
-  return fname == 'ControlP' ? g:lightline.ctrlp_item :
-    \ fname == '__Tagbar__' ? g:lightline.fname :
-    \ fname =~ '__Gundo\|NERD_tree' ? '' :
-    \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-    \ &ft == 'unite' ? unite#get_status_string() :
-    \ &ft == 'vimshell' ? vimshell#get_status_string() :
-    \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-    \ ('' != fname ? fname : '[No Name]') .
-    \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-endfunction
-
-
-function! LightLineFugitive()
-  if &ft !~? 'vimfiler\|gundo' && exists("*fugitive#head")
-    let _ = fugitive#head()
-"    return strlen(_) ? '⭠ '._ : ''
-    return strlen(_) ? _ : ''
-  endif
-  return ''
-endfunction
-
-function! LightLineFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-
-function! LightLineFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-endfunction
-
-function! LightLineFileencoding()
-  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-endfunction
-
-function! LightLineMode()
-  return winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-
-if has('mac')
-        set guifont=PT\ Mono:h18
-endif
 
 " Unite settings (courtesy of mgraham)
 " Unite

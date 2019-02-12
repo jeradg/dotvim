@@ -58,10 +58,6 @@
 	path = bundle/jellybeans
 	url = https://github.com/nanotech/jellybeans.vim.git
   ignore = dirty
-[submodule "bundle/lightline.vim"]
-	path = bundle/lightline.vim
-	url = https://github.com/itchyny/lightline.vim
-  ignore = dirty
 [submodule "bundle/mustache"]
 	path = bundle/mustache
 	url = git://github.com/mustache/vim-mustache-handlebars.git
@@ -141,3 +137,9 @@
 [submodule "bundle/vim-surround"]
 	path = bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule "bundle/oceanic-next"]
+	path = bundle/oceanic-next
+	url = git@github.com:mhartington/oceanic-next.git
+[submodule "bundle/vim-airline"]
+	path = bundle/vim-airline
+	url = git@github.com:vim-airline/vim-airline.git
