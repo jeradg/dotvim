@@ -14,10 +14,9 @@ set number
 " turn on syntax highlighting
 syntax on
 
-" Set terminal to screen with 256 colours
+" Set terminal to xterm with 256 colours and italics
 " (Fixes colours when using vim with tmux)
-set term=screen-256color
-set t_Co=256
+set term=xterm-256color
 set background=dark
 
 " for vim 8
@@ -29,7 +28,9 @@ endif
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-colorscheme OceanicNext
+" Add support for italics (these are the italics escape codes)
+highlight Comment cterm=italic
+
 let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 
@@ -37,9 +38,7 @@ let g:oceanic_next_terminal_italic = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='oceanicnext'
 
-" colorscheme jellybeans
-" let g:jellybeans_use_term_italics = 1
-" colorscheme solarized
+colorscheme OceanicNext
 
 " Store swap files in fixed location, not current directory.
 " (Mostly to help with Ember development, as broccoli can
