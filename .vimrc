@@ -16,7 +16,8 @@ syntax on
 
 " Set terminal to xterm with 256 colours and italics
 " (Fixes colours when using vim with tmux)
-set term=xterm-256color
+" NOTE: Unnecessary in neovim
+" set term=xterm-256color
 set background=dark
 
 " for vim 8
