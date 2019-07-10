@@ -11,19 +11,26 @@ set expandtab
 " turn on line numbers
 set number
 
-" turn on syntax highlighting
-syntax on
+if has('nvim')
+    " For Neovim 0.1.3 and 0.1.4
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+else
+    " Set terminal to xterm with 256 colours and italics
+    " (Fixes colours when using vim with tmux)
+    " NOTE: Unnecessary in neovim
 
-" Set terminal to xterm with 256 colours and italics
-" (Fixes colours when using vim with tmux)
-" NOTE: Unnecessary in neovim
-" set term=xterm-256color
-set background=dark
+    set term=xterm-256color
+endif
 
 " for vim 8
 if (has("termguicolors"))
   set termguicolors
 endif
+
+" turn on syntax highlighting
+syntax on
+
+set background=dark
 
 " set Vim-specific sequences for RGB colors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
