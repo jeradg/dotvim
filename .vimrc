@@ -181,10 +181,6 @@ let g:unite_source_history_yank_enable=1
 " call unite#custom#source('file_rec/async', 'matchers',
 "   \ 'matcher_project_ignore_files')
 
-" Use CommandT like ctrlp
-nnoremap <C-p> :CommandT<cr>
-let g:CommandTFileScanner = 'git'
-
 " Disable folding in Markdown files
 let g:vim_markdown_folding_disabled=1
 
@@ -204,6 +200,19 @@ map <Leader>a :call RunAllSpecs()<CR>
 map <D-r> :w<bar>:call RunLastSpec()<CR>
 imap <D-r> <esc>:w<bar>:call RunLastSpec()<CR>
 
+" Tell ctrlp to ignore files from .gitignore
+" per https://github.com/kien/ctrlp.vim/issues/174#issuecomment-218866242
+if executable('ag')
+  " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+  set grepprg=ag\ --nogroup\ --nocolor
+  " Use ag in CtrlP for listing files. Lightning fast, respects .gitignore
+  " and .agignore. Ignores hidden files by default.
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -f -g ""'
+else
+  "ctrl+p ignore files in .gitignore
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+endif
+
 " Highlight words to avoid in tech writing
 " =======================================
 "
@@ -213,7 +222,6 @@ imap <D-r> <esc>:w<bar>:call RunLastSpec()<CR>
 "   http://css-tricks.com/words-avoid-educational-writing/
 
 "   Code from https://github.com/pengwynn/dotfiles/blob/e090448a71c46fc017acdbd393a5f2f867c6f186/vim/vimrc.symlink#L202-L218
-
 highlight TechWordsToAvoid ctermbg=red ctermfg=white
 function MatchTechWordsToAvoid()
   match TechWordsToAvoid /\c\<\(obviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however\|so,\|easy\)\>/
