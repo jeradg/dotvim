@@ -5,7 +5,7 @@ dotvim
 
 Installation:
 
-    git clone git://github.com/jeradg/dotvim.git ~/.vim
+    git clone git://github.com/jeradg/dotvim.git ~/.vim --recursive
 
 Create symlinks:
 
