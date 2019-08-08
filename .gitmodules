@@ -158,3 +158,6 @@
 [submodule "bundle/vim-startify"]
 	path = bundle/vim-startify
 	url = git@github.com:mhinz/vim-startify.git
+[submodule "bundle/vim-rooter"]
+	path = bundle/vim-rooter
+	url = git@github.com:airblade/vim-rooter.git
