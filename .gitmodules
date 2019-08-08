@@ -155,3 +155,6 @@
 [submodule "bundle/vim-repeat"]
 	path = bundle/vim-repeat
 	url = git@github.com:tpope/vim-repeat.git
+[submodule "bundle/vim-startify"]
+	path = bundle/vim-startify
+	url = git@github.com:mhinz/vim-startify.git
