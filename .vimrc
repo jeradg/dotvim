@@ -231,3 +231,6 @@ autocmd BufWinLeave *.md call clearmatches()
 
 " Gundo (graphical undo tree)
 nnoremap <F5> :GundoToggle<CR>
+
+" vim-gitgutter
+let g:gitgutter_async=0
