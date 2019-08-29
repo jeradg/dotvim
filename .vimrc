@@ -75,6 +75,8 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
 " Store swap files in fixed location, not current directory.
 " (Mostly to help with Ember development, as broccoli can
 " get confused when .swp files are created/deleted)
