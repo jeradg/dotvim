@@ -1,6 +1,58 @@
-" Load Pathogen plugins
-execute pathogen#infect()
-execute pathogen#helptags()
+" Autoinstall vim-plug if it isn't present
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Load vim-plug plugins
+call plug#begin('~/.vim/plugged')
+
+" Do I need these ones?
+"
+" 'ervandew/supertab'
+" 'Shougo/unite.vim'
+" yajs.vim
+" yats.vim
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'nullvoxpopuli/coc-ember', {'do': 'yarn install --frozen-lockfile'}
+Plug 'dense-analysis/ale'
+Plug 'jiangmiao/auto-pairs'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'kchmck/vim-coffee-script'
+Plug 'kien/ctrlp.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'tpope/vim-fugitive'
+Plug 'othree/html5.vim'
+Plug 'plasticboy/vim-markdown'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'Shougo/neomru.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'chr4/nginx.vim'
+Plug 'mhartington/oceanic-next'
+Plug 'rust-lang/rust.vim'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-abolish'
+Plug 'vim-airline/vim-airline'
+Plug 'ap/vim-css-color'
+Plug 'elixir-lang/vim-elixir'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-repeat'
+Plug 'airblade/vim-rooter'
+Plug 'thoughtbot/vim-rspec'
+Plug 'vim-ruby/vim-ruby'
+Plug 'mhinz/vim-startify'
+Plug 'tpope/vim-surround'
+Plug 'posva/vim-vue'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+
+call plug#end()
+
+" " Load Pathogen plugins
+" execute pathogen#infect()
+" execute pathogen#helptags()
 
 " Tab settings
 set smartindent
@@ -104,32 +156,6 @@ au BufEnter *.hs compiler ghc
 au BufEnter *.hs let g:haddock_browser="/usr/bin/google-chrome-stable"
 autocmd FileType hs set tabstop=8 softtabstop=4 shiftwidth=4 shiftround
 
-" Unite settings (courtesy of mgraham)
-" Unite
-let g:unite_source_history_yank_enable = 1
-" nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
-nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
-nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
-nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
-nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
-nnoremap <leader>e :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
-
-" Custom mappings for the unite buffer
-autocmd FileType unite call s:unite_settings()
-function! s:unite_settings()
-  " Play nice with supertab
-  let b:SuperTabDisabled=1
-  " Enable navigation with control-j and control-k in insert mode
-  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-  " Close Unite
-  nmap <buffer> <ESC>      <Plug>(unite_exit)
-  imap <buffer> <C-l>      <Plug>(unite_exit)
-  nmap <buffer> <C-l>      <Plug>(unite_exit)
-  imap <buffer> <C-c>      <Plug>(unite_exit)
-  nmap <buffer> <C-c>      <Plug>(unite_exit)
-endfunction
-
 " EasyAlign
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -137,48 +163,8 @@ xmap ga <Plug>(EasyAlign)
 " " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)"
 
-" Unite grep settings (courtesy of mgraham)
-" Not really using Unite grep because it's so damn slow
-" in the current version of Vim. (Might change in future.)
-if executable('ag')
-" Use ag in unite grep source.
-let g:unite_source_grep_command = 'ag'
-" let g:unite_source_grep_default_opts =
-" \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
-" \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'' ' .
-" \ ' --ignore ''.yardoc'' --ignore ''html'' --ignore ''doc'' ' .
-" \ ' --ignore ''vendor'' --ignore ''log'' --ignore ''public/assets'' ' .
-" \ ' --ignore ''node_modules'' --ignore ''.sass-cache'' ' .
-" \ ' --ignore ''tmp'' '
-let g:unite_source_grep_recursive_opt = ''
-" let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
-let g:unite_source_rec_async_command = 'ag --follow --nocolor --nogroup --hidden -g ""'
-elseif executable('pt')
-" if executable('pt')
-" Use pt in unite grep source.
-" https://github.com/monochromegane/the_platinum_searcher
-let g:unite_source_grep_command = 'pt'
-let g:unite_source_grep_default_opts = '--nogroup --nocolor'
-let g:unite_source_grep_recursive_opt = ''
-" Ignore .gitignore'd files with async search
-elseif executable('ack-grep')
-" Use ack in unite grep source.
-let g:unite_source_grep_command = 'ack-grep'
-let g:unite_source_grep_default_opts = " --ignore-dir=.yardoc --ignore-dir=html --ignore-dir=doc --ignore-dir=vendor --ignore-dir=log --ignore-dir=public/assets --ignore-dir=tmp"
-let g:unite_source_grep_recursive_opt = ''
-endif
-
 " netrw
 let g:netrw_banner = 0
-
-call unite#filters#sorter_default#use(['sorter_rank'])
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#custom#source('file_mru','sorters','sorter_none')
-let g:unite_enable_start_insert=1
-let g:unite_source_history_yank_enable=1
-" " Ignore .gitignore files
-" call unite#custom#source('file_rec/async', 'matchers',
-"   \ 'matcher_project_ignore_files')
 
 " Disable folding in Markdown files
 let g:vim_markdown_folding_disabled=1
