@@ -48,6 +48,8 @@ colorscheme OceanicNext
 let g:airline_powerline_fonts = 1
 let g:airline_theme='oceanicnext'
 
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
@@ -74,8 +76,6 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
-
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 " Store swap files in fixed location, not current directory.
 " (Mostly to help with Ember development, as broccoli can
