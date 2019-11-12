@@ -10,24 +10,22 @@ call plug#begin('~/.vim/plugged')
 
 " Do I need these ones?
 "
-" 'ervandew/supertab'
 " 'Shougo/unite.vim'
-" yajs.vim
-" yats.vim
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'nullvoxpopuli/coc-ember', {'do': 'yarn install --frozen-lockfile'}
 Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'kchmck/vim-coffee-script'
 Plug 'kien/ctrlp.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'ervandew/supertab'
 Plug 'tpope/vim-fugitive'
 Plug 'othree/html5.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'mustache/vim-mustache-handlebars'
-Plug 'Shougo/neomru.vim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'scrooloose/nerdcommenter'
 Plug 'chr4/nginx.vim'
 Plug 'mhartington/oceanic-next'
@@ -50,10 +48,6 @@ Plug 'leafgarland/typescript-vim'
 
 call plug#end()
 
-" " Load Pathogen plugins
-" execute pathogen#infect()
-" execute pathogen#helptags()
-
 " Tab settings
 set smartindent
 set tabstop=2
@@ -64,14 +58,14 @@ set expandtab
 set number
 
 if has('nvim')
-    " For Neovim 0.1.3 and 0.1.4
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  " For Neovim 0.1.3 and 0.1.4
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 else
-    " Set terminal to xterm with 256 colours and italics
-    " (Fixes colours when using vim with tmux)
-    " NOTE: Unnecessary in neovim
+  " Set terminal to xterm with 256 colours and italics
+  " (Fixes colours when using vim with tmux)
+  " NOTE: Unnecessary in neovim
 
-    set term=xterm-256color
+  set term=xterm-256color
 endif
 
 " for vim 8
@@ -169,22 +163,6 @@ let g:netrw_banner = 0
 " Disable folding in Markdown files
 let g:vim_markdown_folding_disabled=1
 
-" RSpec.vim mappings
-let g:rspec_command = "call Send_to_Tmux(\"RSpecConsole.run '{spec}'\n\")"
-" map <Leader>rt :call RunCurrentSpecFile()<CR>
-" map <Leader>rs :call RunNearestSpec()<CR>
-" map <Leader>rr :call RunLastSpec()<CR>
-" map <Leader>ra :call RunAllSpecs()<CR>
-
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-
-" mac cmd-r -save and run last spec
-map <D-r> :w<bar>:call RunLastSpec()<CR>
-imap <D-r> <esc>:w<bar>:call RunLastSpec()<CR>
-
 " Tell ctrlp to ignore files from .gitignore
 " per https://github.com/kien/ctrlp.vim/issues/174#issuecomment-218866242
 if executable('ag')
@@ -208,17 +186,58 @@ endif
 
 "   Code from https://github.com/pengwynn/dotfiles/blob/e090448a71c46fc017acdbd393a5f2f867c6f186/vim/vimrc.symlink#L202-L218
 highlight TechWordsToAvoid ctermbg=red ctermfg=white
-function MatchTechWordsToAvoid()
-  match TechWordsToAvoid /\c\<\(obviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however\|so,\|easy\)\>/
-endfunction
+if !exists("*MatchTechWordsToAvoid")
+  function MatchTechWordsToAvoid()
+    match TechWordsToAvoid /\c\<\(obviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however\|so,\|easy\)\>/
+  endfunction
+endif
 autocmd FileType mkd call MatchTechWordsToAvoid()
 autocmd BufWinEnter *.md call MatchTechWordsToAvoid()
 autocmd InsertEnter *.md call MatchTechWordsToAvoid()
 autocmd InsertLeave *.md call MatchTechWordsToAvoid()
 autocmd BufWinLeave *.md call clearmatches()
 
-" Gundo (graphical undo tree)
-nnoremap <F5> :GundoToggle<CR>
-
 " vim-gitgutter
 let g:gitgutter_async=0
+
+" coc
+call coc#config('coc.preferences', {
+      \ "autoTrigger": "always",
+      \ "codeLens.enable": 1,
+      \ "diagnostic.virtualText": 1,
+      \ "eslint.fileTypes": ["javascript", "typescript"],
+      \ "maxCompleteItemCount": 10,
+      \})
+
+let s:coc_extensions = [
+      \ 'coc-dictionary',
+      \ 'coc-ember',
+      \ 'coc-eslint',
+      \ 'coc-json',
+      \ 'coc-tag',
+      \ 'coc-rls',
+      \ 'coc-tsserver',
+      \ 'coc-ultisnips',
+      \]
+
+for extension in s:coc_extensions
+  call coc#add_extension(extension)
+endfor
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" supertab
+" Make supertab start at the top of the list when tab-completing
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
