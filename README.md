@@ -1,6 +1,8 @@
 dotvim
 =========
 
+**Deprecated. I'm using Spacevim now. See [.SpaceVim.d](https://github.com/jeradg/.SpaceVim.d).**
+
 (Instructions per http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen/)
 
 Installation:
